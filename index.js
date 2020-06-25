@@ -22,6 +22,7 @@ app.use(function(req, res, next) {
 
 // GET / - display all articles and their authors
 app.get('/', function(req, res) {
+  //res.send('home')
   db.article.findAll({
     include: [db.author]
   }).then(function(articles) {
@@ -36,8 +37,11 @@ app.get('/', function(req, res) {
 app.use('/authors', require('./controllers/authors'))
 app.use('/articles', require('./controllers/articles'))
 
-var server = app.listen(process.env.PORT || 3000, function() {
+let port = process.env.PORT || 3000
+
+var server = app.listen(port, function() {
   rowdy.print()
+  console.log(`port: ${port}`)
 })
 
 module.exports = server

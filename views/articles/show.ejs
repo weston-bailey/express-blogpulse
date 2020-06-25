@@ -3,9 +3,20 @@
 <p>
   <strong><%= moment(article.createdAt).calendar() %></strong>
 </p>
-
 <p><%= article.content %></p>
+<% article.comments.forEach( (comment) => { %>
+  <h5>Commenter: <%= comment.dataValues.name %></h5>
+  <p><%= comment.dataValues.content %></p>
+<% }) %>
+<form action="/articles/<%= article.id %>/comments " method="POST">
+  <div class="form-group">
+    <label for="name">Your Name</label>
+    <input type="text" class="form-control" id="name" name="name" required></input>
+    <label for="text">Add Comment</label>
+    <textarea type="text" class="form-control" id="text" name="text" required></textarea>
+    <input type="submit" class="btn btn-primary">
+  </form>
 
-<hr />
+</div>
 
 <a href="/">&larr; Back Home</a>
